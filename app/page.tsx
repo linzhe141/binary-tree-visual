@@ -6,7 +6,7 @@ import message from './message'
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const wraperRef = useRef<HTMLDivElement>(null)
-  const [size, setSize] = useState({ height: 0, width: 0 })
+  const [containerSize, setContainerSize] = useState({ height: 0, width: 0 })
   const [input, setInput] = useState('[1,2,3,4,5,6,7,8,9]')
 
   const distance = 50
@@ -18,7 +18,7 @@ export default function Home() {
       return
     }
     const ctx = canvasRef.current?.getContext('2d')!
-    ctx.clearRect(0, 0, size.width, size.height)
+    ctx.clearRect(0, 0, containerSize.width, containerSize.height)
 
     const formatInput: (number | null)[] = JSON.parse(input)
     const root = createBinaryTreeFromArray(formatInput)
@@ -32,11 +32,9 @@ export default function Home() {
     const fullBTRoot = createBinaryTreeFromArray(arr)
     const fullBfsNodeList = bfs(fullBTRoot)
     const treeHeight = getTreeHeight(root)
-    const wraperHeight = wraperRef.current!.clientHeight
-    const wraperWidth = wraperRef.current!.clientWidth
     const flagCoordX =
-      wraperWidth / 2 - (Math.pow(2, treeHeight) * distance) / 2
-    const flagCoordY = wraperHeight / 2 + (treeHeight * height) / 2
+      containerSize.width / 2 - (Math.pow(2, treeHeight) * distance) / 2
+    const flagCoordY = containerSize.height / 2 + (treeHeight * height) / 2
     const flagCoord: [number, number] = [flagCoordX, flagCoordY]
     setCoord(fullBfsNodeList, flagCoord, distance, height)
 
@@ -89,7 +87,7 @@ export default function Home() {
   function resizeHandle() {
     const wraperHeight = wraperRef.current!.clientHeight
     const wraperWidth = wraperRef.current!.clientWidth
-    setSize({ height: wraperHeight, width: wraperWidth })
+    setContainerSize({ height: wraperHeight, width: wraperWidth })
   }
   useEffect(() => {
     resizeHandle()
@@ -102,7 +100,7 @@ export default function Home() {
   useEffect(() => {
     draw()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [size])
+  }, [containerSize])
   return (
     <div className='relative h-screen items-center' ref={wraperRef}>
       <div className='absolute left-4 top-4 flex'>
@@ -120,8 +118,8 @@ export default function Home() {
         </button>
       </div>
       <canvas
-        width={size.width + 'px'}
-        height={size.height + 'px'}
+        width={containerSize.width + 'px'}
+        height={containerSize.height + 'px'}
         ref={canvasRef}
       ></canvas>
     </div>
