@@ -47,7 +47,7 @@ export default function Home() {
     }
     function drawText() {
       for (let i = 0; i < fullBfsNodeList.length; i++) {
-        if (!formatInput[i]) continue
+        if (formatInput[i] === null || formatInput[i] === undefined) continue
         ctx.beginPath()
         const node = fullBfsNodeList[i]
         ctx.font = '14px serif'
@@ -75,7 +75,7 @@ export default function Home() {
     }
     function drawCircle() {
       for (let i = 0; i < fullBfsNodeList.length; i++) {
-        if (!formatInput[i]) continue
+        if (formatInput[i] === null || formatInput[i] === undefined) continue
         const node = fullBfsNodeList[i]
         ctx.beginPath()
         ctx.arc(node.x, node.y, 20, 0, 2 * Math.PI)
