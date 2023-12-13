@@ -6,6 +6,9 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: '二叉树可视化',
   description: '二叉树可视化 Binary tree visualization',
+  icons: {
+    icon: '/logo.svg',
+  },
 }
 
 export default function RootLayout({
