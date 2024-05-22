@@ -104,6 +104,7 @@ export default function Home() {
   return (
     <div className='relative h-screen items-center' ref={wraperRef}>
       <div className='absolute left-4 top-4 flex'>
+        <input type='file' multiple />
         <textarea
           value={input}
           className='w-[400px] rounded-lg border border-gray-300 px-4 py-2 focus:border-green-400 focus:outline-none'
